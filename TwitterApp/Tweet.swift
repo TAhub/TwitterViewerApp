@@ -10,6 +10,8 @@ import Foundation
 
 struct Tweet
 {
-	let name:String
-	let contents:String
+	let id:String
+	let userName:String
+	let profileImageURL:String
+	let text:String
 }
