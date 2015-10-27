@@ -21,6 +21,7 @@
 		E47C0E071BDEE294006226C2 /* ChallengeW1D1.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ChallengeW1D1.playground; sourceTree = "<group>"; };
 		E4A591631BDFDE8B00DD8015 /* ChallengeW1D2.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ChallengeW1D2.playground; sourceTree = "<group>"; };
 		E4A591641BDFE68100DD8015 /* ChallengeW1D3.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ChallengeW1D3.playground; sourceTree = "<group>"; };
+		E4A591651BDFE8F000DD8015 /* ChallengeW1D4.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ChallengeW1D4.playground; sourceTree = "<group>"; };
 		E4F446401BDED08D00A7BC2D /* TwitterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4F446431BDED08D00A7BC2D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4F446481BDED08D00A7BC2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -72,6 +73,7 @@
 				E4F446431BDED08D00A7BC2D /* AppDelegate.swift */,
 				E4F4464F1BDED08D00A7BC2D /* Info.plist */,
 				E4F446591BDED46B00A7BC2D /* tweet.json */,
+				E4A591651BDFE8F000DD8015 /* ChallengeW1D4.playground */,
 				E4A591641BDFE68100DD8015 /* ChallengeW1D3.playground */,
 				E4A591631BDFDE8B00DD8015 /* ChallengeW1D2.playground */,
 				E47C0E071BDEE294006226C2 /* ChallengeW1D1.playground */,
