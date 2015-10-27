@@ -21,7 +21,7 @@ class TweetJSONParser
 				var tweets = [Tweet]()
 				for tweetObject in rootObject
 				{
-					if let text = tweetObject["text"] as? String, id = tweetObject["id_str"] as? String, user = tweetObject["user"] as? [String : AnyObject], userName = user["name"] as? String, profileImageURL = user["profile_image_url_https"] as? String
+					if let text = tweetObject["text"] as? String, id = tweetObject["id_str"] as? String, user = tweetObject["user"] as? [String : AnyObject], userName = user["name"] as? String, profileImageURL = user["profile_image_url"] as? String
 					{
 						let tweet = Tweet(id: id, text: text, user: User(name: userName, profileImageURL: profileImageURL))
 						tweets.append(tweet)
@@ -35,6 +35,15 @@ class TweetJSONParser
 			//TODO: catch an exception I guess
 		}
 		
+		return nil
+	}
+	
+	class func userFromData(json: [String : AnyObject]) -> User?
+	{
+		if let name = json["name"] as? String, profileImageURL = json["profile_image_url"] as? String
+		{
+			return User(name: name, profileImageURL: profileImageURL)
+		}
 		return nil
 	}
 }

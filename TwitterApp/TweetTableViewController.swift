@@ -20,7 +20,8 @@ class TweetTableViewController: UITableViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		loadNewTweets()
+		getAccount()
+		getUser()
 	}
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int { return 1 }
@@ -38,8 +39,27 @@ class TweetTableViewController: UITableViewController {
         return cell
     }
 	
+	private func getAccount()
+	{
+		LoginService.loginToTwitter()
+			{_,_ in 
+				print("SUCCESS")
+		}
+	}
+	
+	private func getUser()
+	{
+		//TODO: this doesn't seem to be working (probably the fault of twitter service)
+		TwitterService.getAuthUser()
+			{ (error, user) -> () in
+				print(user?.name)
+				self.loadNewTweets()
+		}
+	}
+	
 	private func loadNewTweets()
 	{
+		//TODO: this should load real tweets
 		if let tweetJSONFileUrl = NSBundle.mainBundle().URLForResource("tweet", withExtension: "json")
 		{
 			print("URL: \(tweetJSONFileUrl)")
