@@ -32,7 +32,7 @@ class TweetTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath)
 
-		cell.textLabel!.text = "\(tweets[indexPath.row].userName) (ID: \(tweets[indexPath.row].id))"
+		cell.textLabel!.text = "\(tweets[indexPath.row].user!.name) (tweet ID: \(tweets[indexPath.row].id))"
 		cell.detailTextLabel!.text = tweets[indexPath.row].text
 
         return cell
