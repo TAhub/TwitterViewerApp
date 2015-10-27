@@ -9,15 +9,8 @@ func fizzBuzz()
 {
 	for i in 1...100
 	{
-		var stringOutput = ""
-		if i % 3 == 0
-		{
-			stringOutput += "Fizz"
-		}
-		if i % 5 == 0
-		{
-			stringOutput += "Buzz"
-		}
+		//I love the ternary operator, because I love it when things are nice and compact
+		let stringOutput = (i % 3 == 0 ? "Fizz" : "") + (i % 5 == 0 ? "Buzz" : "")
 		print(stringOutput.isEmpty ? i : stringOutput)
 	}
 }
