@@ -2,6 +2,8 @@
 
 import UIKit
 
+//Day 1: reverse an array
+
 //this reverses an arbitrary array
 func reverseArray<T>(array:[T]) -> [T]
 {
