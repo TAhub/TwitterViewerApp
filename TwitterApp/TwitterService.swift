@@ -28,7 +28,7 @@ class TwitterService
 		}
 		if let maxId = maxId
 		{
-			parameters["max_id"] = "\(maxId)"
+			parameters["max_id"] = "\(maxId-1)"
 		}
 		
 		doRequest(urlString, parameters: parameters)
