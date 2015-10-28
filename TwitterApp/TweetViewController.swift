@@ -29,4 +29,11 @@ class TweetViewController: UIViewController {
 	
 	var tweet:Tweet!
 	var textColor:UIColor?
+	var backgroundColor:UIColor?
+	
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		view.backgroundColor = backgroundColor
+	}
 }

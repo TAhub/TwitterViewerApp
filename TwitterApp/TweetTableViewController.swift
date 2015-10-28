@@ -65,7 +65,7 @@ class TweetTableViewController: UITableViewController {
 				
 				//and give it a pretty color
 				destination.textColor = sender.nameLabel.textColor
-				destination.view.backgroundColor = sender.backgroundColor
+				destination.backgroundColor = sender.backgroundColor
 			}
 		}
 	}
