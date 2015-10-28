@@ -19,7 +19,7 @@ class LoginService
 			{ (success, error) -> Void in
 				if let _ = error
 				{
-					completion("Request access to accounts returned an error.", nil)
+					completion("ERROR: failed to access accounts", nil)
 				}
 				else if success
 				{

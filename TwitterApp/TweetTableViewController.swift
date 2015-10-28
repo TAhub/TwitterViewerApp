@@ -21,7 +21,6 @@ class TweetTableViewController: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		getAccount()
-		getUser()
 	}
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int { return 1 }
@@ -33,11 +32,15 @@ class TweetTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath)
 
-		cell.textLabel!.text = "\(tweets[indexPath.row].user!.name) (tweet ID: \(tweets[indexPath.row].id))"
+		cell.textLabel!.text = "\(tweets[indexPath.row].user!.name) | \(tweets[indexPath.row].id)"
 		cell.detailTextLabel!.text = tweets[indexPath.row].text
 
         return cell
     }
+	
+	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+		return 100 //for now this is a constant
+	}
 	
 	private func getAccount()
 	{

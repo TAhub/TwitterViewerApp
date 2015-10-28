@@ -76,6 +76,8 @@ class TwitterService
 	
 	private class func doRequest(urlString: String, completion: (String?, NSData?) -> ())
 	{
+		//make a request and check if you have an account
+		//because obviously you don't want to bother going forward if you don't have an account
 		if let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, URL: NSURL(string: urlString), parameters: nil), account = self.sharedService.account
 		{
 			request.account = account
@@ -101,6 +103,15 @@ class TwitterService
 						}
 					}
 			}
+		}
+		else if sharedService.account == nil
+		{
+			completion("ERROR: do not have an account when querying \(urlString)", nil)
+		}
+		else
+		{
+			//I don't think this will ever happen, but just in case...
+			completion("ERROR: unable to generate request somehow when querying \(urlString)", nil)
 		}
 	}
 }
