@@ -15,12 +15,19 @@ class TweetTableViewController: UITableViewController {
 		didSet
 		{
 			tableView.reloadData()
+			refreshControl?.endRefreshing()
 		}
 	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		getAccount()
+		
+		//add the refresh control programmatically
+		//I could do it in the interface builder but whatever, it's not really any faster or easier
+		refreshControl = UIRefreshControl()
+		refreshControl?.addTarget(self, action: "loadNewTweets:", forControlEvents: UIControlEvents.ValueChanged)
+		tableView.addSubview(refreshControl!)
 	}
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int { return 1 }
@@ -68,13 +75,15 @@ class TweetTableViewController: UITableViewController {
 				}
 				else
 				{
-					self.loadNewTweets()
+					self.loadNewTweets(self)
 				}
 		}
 	}
 	
-	private func loadNewTweets()
+	func loadNewTweets(sender:AnyObject)
 	{
+		//this will load tweets, whether or not you have them already
+		
 		TwitterService.getTweets()
 			{ (error, tweets) in
 				if let error = error
