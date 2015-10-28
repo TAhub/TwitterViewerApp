@@ -17,33 +17,89 @@ class TwitterService
 	var account: ACAccount?
 	var user: User?
 	
+	class func getTweets(completion: (String?, [Tweet]?) -> ())
+	{
+		let urlString = "https://api.twitter.com/1.1/statuses/home_timeline.json"
+		doRequest(urlString)
+			{ (error, data) in
+				if let error = error
+				{
+					completion(error, nil)
+				}
+				else if let data = data
+				{
+					if let tweets = TweetJSONParser.tweetFromJSONData(data)
+					{
+						completion(nil, tweets)
+					}
+					else
+					{
+						completion("ERROR: unable to des-serialize JSON when querying \(urlString)", nil)
+					}
+				}
+				else
+				{
+					completion("ERROR: unable to retrieve data somehow when querying \(urlString)", nil)
+				}
+		}
+	}
+	
 	class func getAuthUser(completion: (String?, User?) -> ())
 	{
-		let url = NSURL(string: "https://api.twitter.com/1.1/account/verify_credentials.json")!
-		
-		if let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, URL: url, parameters: nil)
-		{
-			if let account = self.sharedService.account
-			{
-				request.account = account
-				
-				request.performRequestWithHandler()
-					{ (data, response, error) -> Void in
-						if response.statusCode == 200
-						{
-							do
-							{
-								if let userData = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as? [String: AnyObject], user = TweetJSONParser.userFromData(userData)
-								{
-									completion(nil, user)
-								}
-							}
-							catch _
-							{
-								//TODO: catch an exception
-							}
-						}
+		let urlString = "https://api.twitter.com/1.1/account/verify_credentials.json"
+		doRequest(urlString)
+			{ (error, data) in
+				if let error = error
+				{
+					completion(error, nil)
 				}
+				else if let data = data
+				{
+					do
+					{
+						if let userData = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as? [String : AnyObject], let user = TweetJSONParser.userFromData(userData)
+						{
+							completion(nil, user)
+						}
+					}
+					catch
+					{
+						completion("ERROR: unable to de-serialize JSON when querying \(urlString)", nil)
+					}
+				}
+				else
+				{
+					completion("ERROR: unable to retrieve data somehow when querying \(urlString)", nil)
+				}
+		}
+	}
+	
+	private class func doRequest(urlString: String, completion: (String?, NSData?) -> ())
+	{
+		if let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, URL: NSURL(string: urlString), parameters: nil), account = self.sharedService.account
+		{
+			request.account = account
+			request.performRequestWithHandler()
+				{ (data, response, error) -> Void in
+					if let error = error
+					{
+						completion(error.description, nil)
+					}
+					else
+					{
+						switch(response.statusCode)
+						{
+						case 200...299:
+							completion(nil, data)
+						case 400...499:
+							completion("ERROR: user error code \(response.statusCode) when querying \(urlString)", nil)
+						case 500...599:
+							completion("ERROR: server error code \(response.statusCode) when querying \(urlString)", nil)
+						default:
+							completion("ERROR: miscellaneous error code \(response.statusCode) when querying \(urlString)", nil)
+							break
+						}
+					}
 			}
 		}
 	}

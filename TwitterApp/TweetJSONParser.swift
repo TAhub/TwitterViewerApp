@@ -16,8 +16,6 @@ class TweetJSONParser
 		{
 			if let rootObject = try NSJSONSerialization.JSONObjectWithData(json, options: NSJSONReadingOptions.MutableContainers) as? [[String : AnyObject]]
 			{
-				print("ROOTOBJECT: \(rootObject)")
-				
 				var tweets = [Tweet]()
 				for tweetObject in rootObject
 				{
@@ -30,9 +28,9 @@ class TweetJSONParser
 				return tweets
 			}
 		}
-		catch _
+		catch
 		{
-			//TODO: catch an exception I guess
+			//there was an exception
 		}
 		
 		return nil

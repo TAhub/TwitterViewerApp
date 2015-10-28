@@ -42,39 +42,49 @@ class TweetTableViewController: UITableViewController {
 	private func getAccount()
 	{
 		LoginService.loginToTwitter()
-			{_,_ in 
-				print("SUCCESS")
+			{(error, account) in
+				if let error = error
+				{
+					print(error)
+				}
+				else if let account = account
+				{
+					TwitterService.sharedService.account = account
+					self.getUser()
+				}
 		}
 	}
 	
 	private func getUser()
 	{
-		//TODO: this doesn't seem to be working (probably the fault of twitter service)
 		TwitterService.getAuthUser()
 			{ (error, user) -> () in
-				print(user?.name)
-				self.loadNewTweets()
+				if let error = error
+				{
+					print(error)
+				}
+				else
+				{
+					self.loadNewTweets()
+				}
 		}
 	}
 	
 	private func loadNewTweets()
 	{
-		//TODO: this should load real tweets
-		if let tweetJSONFileUrl = NSBundle.mainBundle().URLForResource("tweet", withExtension: "json")
-		{
-			print("URL: \(tweetJSONFileUrl)")
-			
-			if let tweetJSONData = NSData(contentsOfURL: tweetJSONFileUrl)
-			{
-				print("JSON: \(tweetJSONData)")
-				
-				if let tweets = TweetJSONParser.tweetFromJSONData(tweetJSONData)
+		TwitterService.getTweets()
+			{ (error, tweets) in
+				if let error = error
 				{
-					print("TWEETS: \(tweets)")
-					
-					self.tweets = tweets
+					print(error)
 				}
-			}
+				else if let tweets = tweets
+				{
+					NSOperationQueue.mainQueue().addOperationWithBlock()
+						{
+							self.tweets = tweets
+					}
+				}
 		}
 	}
 }
