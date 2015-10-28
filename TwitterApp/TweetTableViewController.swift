@@ -20,10 +20,27 @@ class TweetTableViewController: UITableViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
 		getAccount()
+		
+		//get temporary tweets
+		//because I keep getting 429 errors
+//		for i in 0..<20
+//		{
+//			var text = "TEST"
+//			for _ in 0..<Int(Double(i) * 1.5)
+//			{
+//				text += " FILLER"
+//			}
+//			tweets.append(Tweet(id: "\(i)", text: text, user: User(name: "tester", profileImageURL: "a")))
+//		}
+		
 		
 		//make the background a netural gray, for the beautiful rainbow
 		view.backgroundColor = UIColor(hue: 0, saturation: 0, brightness: 0.5, alpha: 1)
+		//oh yeah and make the row height good I guess
+		tableView.estimatedRowHeight = 100
+		tableView.rowHeight = UITableViewAutomaticDimension
 		
 		//add the refresh control programmatically
 		//I could do it in the interface builder but whatever, it's not really any faster or easier
@@ -37,21 +54,30 @@ class TweetTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tweets.count
     }
+	
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		if segue.identifier == "showTweet"
+		{
+			if let sender = sender as? TweetTableViewCell, destination = segue.destinationViewController as? TweetViewController
+			{
+				//give it the tweet
+				destination.tweet = tweets[tableView.indexPathForCell(sender)!.row]
+				
+				//and give it a pretty color
+				destination.textColor = sender.nameLabel.textColor
+				destination.view.backgroundColor = sender.backgroundColor
+			}
+		}
+	}
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetTableViewCell
 
-		cell.textLabel!.text = "\(tweets[indexPath.row].user!.name) | \(tweets[indexPath.row].id)"
-		cell.detailTextLabel!.text = tweets[indexPath.row].text
+		cell.tweet = tweets[indexPath.row]
+		cell.colorPoint = CGFloat(Double(indexPath.row % 12) / 12.0)
 		
-		cell.backgroundColor = UIColor(hue: CGFloat(Double(indexPath.row % 12) / 12.0), saturation: 0.5, brightness: 1, alpha: 1)
-
         return cell
     }
-	
-	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-		return 100 //for now this is a constant
-	}
 	
 	private func getAccount()
 	{
@@ -150,8 +176,6 @@ class TweetTableViewController: UITableViewController {
 			}
 		}
 		
-		//scrolledToBottom is to prevent you from having a maxID and a sinceID at the same time
-		//since that apparently prevents anything from happening
 		TwitterService.getTweets(sinceId: sinceId, maxId: nil)
 			{ (error, tweets) in
 				self.refreshControl!.endRefreshing()
