@@ -22,6 +22,9 @@ class TweetTableViewController: UITableViewController {
 		super.viewDidLoad()
 		getAccount()
 		
+		//make the background a netural gray, for the beautiful rainbow
+		view.backgroundColor = UIColor(hue: 0, saturation: 0, brightness: 0.5, alpha: 1)
+		
 		//add the refresh control programmatically
 		//I could do it in the interface builder but whatever, it's not really any faster or easier
 		refreshControl = UIRefreshControl()
@@ -40,6 +43,8 @@ class TweetTableViewController: UITableViewController {
 
 		cell.textLabel!.text = "\(tweets[indexPath.row].user!.name) | \(tweets[indexPath.row].id)"
 		cell.detailTextLabel!.text = tweets[indexPath.row].text
+		
+		cell.backgroundColor = UIColor(hue: CGFloat(Double(indexPath.row % 12) / 12.0), saturation: 0.5, brightness: 1, alpha: 1)
 
         return cell
     }
