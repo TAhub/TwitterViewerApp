@@ -17,10 +17,21 @@ class TwitterService
 	var account: ACAccount?
 	var user: User?
 	
-	class func getTweets(completion: (String?, [Tweet]?) -> ())
+	class func getTweets(sinceId sinceId:Int?, maxId:Int?, completion: (String?, [Tweet]?) -> ())
 	{
 		let urlString = "https://api.twitter.com/1.1/statuses/home_timeline.json"
-		doRequest(urlString)
+		var parameters = [NSObject : String]()
+		parameters["count"] = "8"
+		if let sinceId = sinceId
+		{
+			parameters["since_id"] = "\(sinceId)"
+		}
+		if let maxId = maxId
+		{
+			parameters["max_id"] = "\(maxId)"
+		}
+		
+		doRequest(urlString, parameters: parameters)
 			{ (error, data) in
 				if let error = error
 				{
@@ -47,7 +58,7 @@ class TwitterService
 	class func getAuthUser(completion: (String?, User?) -> ())
 	{
 		let urlString = "https://api.twitter.com/1.1/account/verify_credentials.json"
-		doRequest(urlString)
+		doRequest(urlString, parameters: nil)
 			{ (error, data) in
 				if let error = error
 				{
@@ -74,11 +85,11 @@ class TwitterService
 		}
 	}
 	
-	private class func doRequest(urlString: String, completion: (String?, NSData?) -> ())
+	private class func doRequest(urlString: String, parameters: [NSObject : AnyObject]?, completion: (String?, NSData?) -> ())
 	{
 		//make a request and check if you have an account
 		//because obviously you don't want to bother going forward if you don't have an account
-		if let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, URL: NSURL(string: urlString), parameters: nil), account = self.sharedService.account
+		if let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, URL: NSURL(string: urlString), parameters: parameters), account = self.sharedService.account
 		{
 			request.account = account
 			request.performRequestWithHandler()
