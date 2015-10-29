@@ -202,20 +202,20 @@
                                     <constraint firstAttribute="width" constant="200" id="oy8-Om-zWT"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME LABEL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBt-1P-Y56">
-                                <rect key="frame" x="20" y="236" width="560" height="33"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBt-1P-Y56">
+                                <rect key="frame" x="20" y="236" width="560" height="0.0"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FOLLOWER LABEL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kg0-Am-696">
-                                <rect key="frame" x="20" y="277" width="560" height="15"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kg0-Am-696">
+                                <rect key="frame" x="20" y="244" width="560" height="0.0"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DESCRIPTION" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kd6-JE-fS6">
-                                <rect key="frame" x="20" y="300" width="560" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kd6-JE-fS6">
+                                <rect key="frame" x="20" y="252" width="560" height="0.0"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -238,10 +238,10 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" id="LKP-tD-abL"/>
                     <connections>
-                        <outlet property="descriptionLabel" destination="9IH-RP-qOX" id="SF7-vk-0E7"/>
-                        <outlet property="followerLabel" destination="9IH-RP-qOX" id="Udh-yE-fct"/>
-                        <outlet property="nameLabel" destination="9IH-RP-qOX" id="cnW-9b-VnW"/>
-                        <outlet property="portraitView" destination="9IH-RP-qOX" id="NnJ-fv-LZN"/>
+                        <outlet property="descriptionLabel" destination="Kd6-JE-fS6" id="kaZ-U3-1xO"/>
+                        <outlet property="followerLabel" destination="Kg0-Am-696" id="GOg-Hn-gCl"/>
+                        <outlet property="nameLabel" destination="FBt-1P-Y56" id="5bR-w1-DDY"/>
+                        <outlet property="profileView" destination="dwU-J6-xjl" id="z9s-t3-j7y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a5t-Wu-TzD" userLabel="First Responder" sceneMemberID="firstResponder"/>

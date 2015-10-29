@@ -14,7 +14,7 @@ class ProfileViewController: UIViewController {
 	{
 		didSet
 		{
-			if nameLabel != nil
+			if nameLabel != nil && followerLabel != nil && descriptionLabel != nil
 			{
 				if let profileData = profileData
 				{
@@ -31,11 +31,12 @@ class ProfileViewController: UIViewController {
 			}
 		}
 	}
-
-	@IBOutlet var nameLabel: UILabel!
-	@IBOutlet var followerLabel: UILabel!
-	@IBOutlet var descriptionLabel: UILabel!
-	@IBOutlet var portraitView: UIImageView!
+	
+	@IBOutlet weak var profileView: UIImageView!
+	@IBOutlet weak var nameLabel: UILabel!
+	@IBOutlet weak var followerLabel: UILabel!
+	@IBOutlet weak var descriptionLabel: UILabel!
+	
 	
 	
 	override func viewWillAppear(animated: Bool) {
