@@ -28,6 +28,15 @@ class TweetViewController: UIViewController {
 	}
 	
 	var tweet:Tweet!
+	{
+		didSet
+		{
+			if let ogTweet = tweet?.originalTweet
+			{
+				tweet = ogTweet
+			}
+		}
+	}
 	var textColor:UIColor?
 	var backgroundColor:UIColor?
 	

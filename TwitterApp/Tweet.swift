@@ -8,9 +8,18 @@
 
 import Foundation
 
-struct Tweet
+class Tweet
 {
 	let id:String
 	let text:String
+	let originalTweet:Tweet?
 	let user:User?
+	
+	init(id:String, text:String, originalTweet:Tweet?, user:User?)
+	{
+		self.id = id
+		self.text = text
+		self.originalTweet = originalTweet
+		self.user = user
+	}
 }
