@@ -119,7 +119,7 @@
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nF4-zG-UOo">
                                 <rect key="frame" x="200" y="72" width="200" height="200"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="IoW-35-lcm"/>
                                     <constraint firstAttribute="width" constant="200" id="PsG-fI-lJ0"/>
@@ -185,7 +185,7 @@
         <!--Profile-->
         <scene sceneID="kHM-Bx-jvZ">
             <objects>
-                <viewController id="mHx-Wx-XK3" sceneMemberID="viewController">
+                <viewController id="mHx-Wx-XK3" customClass="ProfileViewController" customModule="TwitterApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hQI-1s-ylp"/>
                         <viewControllerLayoutGuide type="bottom" id="c7c-nL-pfi"/>
@@ -194,20 +194,55 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLACEHOLDER FOR PROFILE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmt-LH-K6I">
-                                <rect key="frame" x="187" y="290" width="227" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dwU-J6-xjl">
+                                <rect key="frame" x="200" y="28" width="200" height="200"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="LgD-5V-JXV"/>
+                                    <constraint firstAttribute="width" constant="200" id="oy8-Om-zWT"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME LABEL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBt-1P-Y56">
+                                <rect key="frame" x="20" y="236" width="560" height="33"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FOLLOWER LABEL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kg0-Am-696">
+                                <rect key="frame" x="20" y="277" width="560" height="15"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DESCRIPTION" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kd6-JE-fS6">
+                                <rect key="frame" x="20" y="300" width="560" height="20"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="wmt-LH-K6I" firstAttribute="centerX" secondItem="9IH-RP-qOX" secondAttribute="centerX" id="kf2-JA-XEr"/>
-                            <constraint firstItem="wmt-LH-K6I" firstAttribute="centerY" secondItem="9IH-RP-qOX" secondAttribute="centerY" id="stH-W1-CLk"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Kg0-Am-696" secondAttribute="trailing" id="8E8-CV-art"/>
+                            <constraint firstItem="Kg0-Am-696" firstAttribute="top" secondItem="FBt-1P-Y56" secondAttribute="bottom" constant="8" symbolic="YES" id="9GX-Zl-fmp"/>
+                            <constraint firstItem="Kd6-JE-fS6" firstAttribute="top" secondItem="Kg0-Am-696" secondAttribute="bottom" constant="8" symbolic="YES" id="Ci8-3R-qzs"/>
+                            <constraint firstItem="FBt-1P-Y56" firstAttribute="leading" secondItem="9IH-RP-qOX" secondAttribute="leadingMargin" id="E6C-Is-4Fr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="FBt-1P-Y56" secondAttribute="trailing" id="VmW-Kl-jje"/>
+                            <constraint firstItem="dwU-J6-xjl" firstAttribute="centerX" secondItem="9IH-RP-qOX" secondAttribute="centerX" id="Wys-AZ-LV6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Kd6-JE-fS6" secondAttribute="trailing" id="cGJ-ce-Bjq"/>
+                            <constraint firstItem="Kg0-Am-696" firstAttribute="leading" secondItem="9IH-RP-qOX" secondAttribute="leadingMargin" id="e9x-44-sxf"/>
+                            <constraint firstItem="dwU-J6-xjl" firstAttribute="top" secondItem="hQI-1s-ylp" secondAttribute="bottom" constant="8" symbolic="YES" id="mBf-UG-xpT"/>
+                            <constraint firstItem="Kd6-JE-fS6" firstAttribute="leading" secondItem="9IH-RP-qOX" secondAttribute="leadingMargin" id="rJr-Id-5c6"/>
+                            <constraint firstItem="FBt-1P-Y56" firstAttribute="top" secondItem="dwU-J6-xjl" secondAttribute="bottom" constant="8" symbolic="YES" id="vLg-kF-xhD"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" id="LKP-tD-abL"/>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="9IH-RP-qOX" id="SF7-vk-0E7"/>
+                        <outlet property="followerLabel" destination="9IH-RP-qOX" id="Udh-yE-fct"/>
+                        <outlet property="nameLabel" destination="9IH-RP-qOX" id="cnW-9b-VnW"/>
+                        <outlet property="portraitView" destination="9IH-RP-qOX" id="NnJ-fv-LZN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a5t-Wu-TzD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

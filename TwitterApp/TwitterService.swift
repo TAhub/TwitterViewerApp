@@ -68,7 +68,7 @@ class TwitterService
 				{
 					do
 					{
-						if let userData = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as? [String : AnyObject], let user = TweetJSONParser.userFromData(userData)
+						if let userData = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as? [String : AnyObject], user = TweetJSONParser.userFromData(userData)
 						{
 							completion(nil, user)
 						}
@@ -82,6 +82,46 @@ class TwitterService
 				{
 					completion("ERROR: unable to retrieve data somehow when querying \(urlString)", nil)
 				}
+		}
+	}
+	
+	class func getProfileData(completion: (String?, ProfileData?) -> ())
+	{
+		let urlString = "https://api.twitter.com/1.1/users/show.json"
+		if let user = self.sharedService.user
+		{
+			var parameters = [NSObject : AnyObject]()
+			parameters["user_id"] = user.id
+			doRequest(urlString, parameters: parameters)
+				{ (error, data) in
+					if let error = error
+					{
+						completion(error, nil)
+					}
+					else if let data = data
+					{
+						do
+						{
+							if let profileJSON = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as? [String : AnyObject], let profileData = TweetJSONParser.profileDataFromData(profileJSON)
+							{
+								completion(nil, profileData)
+							}
+						}
+						catch
+						{
+							completion("ERROR: unable to de-serialize JSON when querying \(urlString)", nil)
+						}
+					}
+					else
+					{
+						completion("ERROR: unable to retrieve data somehow when querying \(urlString)", nil)
+					}
+					
+			}
+		}
+		else
+		{
+			completion("ERROR: do not have a set user when querying \(urlString)", nil)
 		}
 	}
 	

@@ -105,6 +105,7 @@ class TweetTableViewController: UITableViewController {
 				}
 				else
 				{
+					TwitterService.sharedService.user = user
 					self.loadNewTweets(self)
 				}
 		}
