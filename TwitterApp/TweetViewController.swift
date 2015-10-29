@@ -27,6 +27,15 @@ class TweetViewController: UIViewController {
 		}
 	}
 	
+	@IBOutlet weak var portraitView: UIImageView!
+	{
+		didSet
+		{
+			//TODO: set the portrait to an appropriate portrait
+		}
+	}
+	
+	
 	var tweet:Tweet!
 	{
 		didSet
