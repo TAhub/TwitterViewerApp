@@ -13,6 +13,7 @@ class HomeTweetTableViewController: TweetTableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		getTweetsFunction = TwitterService.getTweets
 		getAccount()
 		
 		//get temporary tweets
@@ -26,26 +27,6 @@ class HomeTweetTableViewController: TweetTableViewController {
 		//			}
 		//			tweets.append(Tweet(id: "\(i)", text: text, user: User(name: "tester", profileImageURL: "a")))
 		//		}
-	}
-	
-	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
-	{
-		performSegueWithIdentifier("showTweet", sender: tableView.cellForRowAtIndexPath(indexPath))
-	}
-	
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-		if segue.identifier == "showTweet"
-		{
-			if let sender = sender as? TweetTableViewCell, destination = segue.destinationViewController as? TweetViewController
-			{
-				//give it the tweet
-				destination.tweet = tweets[tableView.indexPathForCell(sender)!.row]
-				
-				//and give it a pretty color
-				destination.textColor = sender.nameLabel.textColor
-				destination.backgroundColor = sender.backgroundColor
-			}
-		}
 	}
 	
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

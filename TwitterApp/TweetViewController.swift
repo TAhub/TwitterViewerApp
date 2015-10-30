@@ -68,4 +68,12 @@ class TweetViewController: UIViewController {
 		
 		view.backgroundColor = backgroundColor
 	}
+	
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+	{
+		if let dest = segue.destinationViewController as? TimelineTweetTableViewController
+		{
+			dest.user = tweet.user
+		}
+	}
 }

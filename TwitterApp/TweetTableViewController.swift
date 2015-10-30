@@ -18,6 +18,8 @@ class TweetTableViewController: UITableViewController {
 		}
 	}
 	
+	var getTweetsFunction:((Int?, Int?, (String?, [Tweet]?) -> ()) -> ())!
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -53,6 +55,26 @@ class TweetTableViewController: UITableViewController {
         return cell
     }
 	
+	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+	{
+		performSegueWithIdentifier("showTweet", sender: tableView.cellForRowAtIndexPath(indexPath))
+	}
+	
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		if segue.identifier == "showTweet"
+		{
+			if let sender = sender as? TweetTableViewCell, destination = segue.destinationViewController as? TweetViewController
+			{
+				//give it the tweet
+				destination.tweet = tweets[tableView.indexPathForCell(sender)!.row]
+				
+				//and give it a pretty color
+				destination.textColor = sender.nameLabel.textColor
+				destination.backgroundColor = sender.backgroundColor
+			}
+		}
+	}
+	
 	override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
 	{
 		//if you're about to display the final cell, and you aren't doing anything
@@ -82,7 +104,8 @@ class TweetTableViewController: UITableViewController {
 		
 		//scrolledToBottom is to prevent you from having a maxID and a sinceID at the same time
 		//since that apparently prevents anything from happening
-		TwitterService.getTweets(sinceId: nil, maxId: maxId)
+		//TwitterService.getTweets(sinceId: nil, maxId: maxId)
+		getTweetsFunction(nil, maxId)
 			{ (error, tweets) in
 				self.refreshControl!.endRefreshing()
 				if let error = error
@@ -119,7 +142,8 @@ class TweetTableViewController: UITableViewController {
 			}
 		}
 		
-		TwitterService.getTweets(sinceId: sinceId, maxId: nil)
+		//TwitterService.getTweets(sinceId: sinceId, maxId: nil)
+		getTweetsFunction(sinceId, nil)
 			{ (error, tweets) in
 				self.refreshControl!.endRefreshing()
 				if let error = error

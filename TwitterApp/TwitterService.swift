@@ -22,7 +22,7 @@ class TwitterService
 		getTweetsFromURL(urlString: "https://api.twitter.com/1.1/statuses/home_timeline.json", sinceId: sinceId, maxId: maxId, count: "8", userId: nil, completion: completion)
 	}
 	
-	class func getTimelineTweets(forUser:User, sinceId:Int?, maxId:Int?, completion: (String?, [Tweet]?) -> ())
+	class func getTimelineTweets(forUser:User)(sinceId:Int?, maxId:Int?, completion: (String?, [Tweet]?) -> ())
 	{
 		getTweetsFromURL(urlString: "https://api.twitter.com/1.1/statuses/user_timeline.json", sinceId: sinceId, maxId: maxId, count: "8", userId: forUser.id, completion: completion)
 	}

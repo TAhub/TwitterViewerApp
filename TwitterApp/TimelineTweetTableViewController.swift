@@ -8,14 +8,15 @@
 
 import UIKit
 
-class TimelineTweetTableViewController: UITableViewController {
+class TimelineTweetTableViewController: TweetTableViewController {
 
 	var user:User!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		//TODO: get tweets
-		//be sure to use the timeline tweet info
+		getTweetsFunction = TwitterService.getTimelineTweets(user)
+		//getTweetsFunction = TwitterService.getTweets
+		loadNewTweets(self)
 	}
 }
