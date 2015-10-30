@@ -31,7 +31,6 @@ class TweetViewController: UIViewController {
 	{
 		didSet
 		{
-			//TODO: get the image
 			if let profileImageURL = tweet.user?.profileImageURL
 			{
 				ImageHandler.fetchImage(profileImageURL)

@@ -20,6 +20,20 @@ class TweetTableViewCell: UITableViewCell {
 		{
 			nameLabel.text = tweet.user?.name ?? "spooky unknown user"
 			contentLabel.text = tweet.text
+			if let profileImageURL = tweet.user?.profileImageURL
+			{
+				ImageHandler.fetchImage(profileImageURL)
+					{ (error, image) in
+						if let error = error
+						{
+							print(error)
+						}
+						else
+						{
+							self.profileImage.image = image
+						}
+				}
+			}
 		}
 	}
 	var colorPoint:CGFloat

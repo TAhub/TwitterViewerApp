@@ -14,5 +14,7 @@ struct ProfileData
 	let description:String
 	let screenName:String
 	let name:String
-	let followers:Int
+	let location:String
+	let profileImageURL:String
+	let profileBackgroundImageURL:String
 }

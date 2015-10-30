@@ -37,7 +37,7 @@ class TweetJSONParser
 	
 	private class func singleTweetFromData(json: [String : AnyObject]) -> Tweet?
 	{
-		if let text = json["text"] as? String, id = json["id_str"] as? String, user = json["user"] as? [String : AnyObject], userName = user["name"] as? String, profileImageURL = user["profile_image_url"] as? String, userID = user["id_str"] as? String
+		if let text = json["text"] as? String, id = json["id_str"] as? String, user = json["user"] as? [String : AnyObject], userName = user["name"] as? String, profileImageURL = user["profile_image_url_https"] as? String, userID = user["id_str"] as? String
 		{
 			//get the original tweet
 			var originalTweet:Tweet?
@@ -53,16 +53,16 @@ class TweetJSONParser
 	
 	class func profileDataFromData(json: [String : AnyObject]) -> ProfileData?
 	{
-		if let followers = json["followers_count"] as? Int, screenName = json["screen_name"] as? String, name = json["name"] as? String, description = json["description"] as? String
+		if let location = json["location"] as? String, screenName = json["screen_name"] as? String, name = json["name"] as? String, description = json["description"] as? String, profileImageURL = json["profile_image_url_https"] as? String, profileBackgroundImageURL = json["profile_background_image_url_https"] as? String
 		{
-			return ProfileData(description: description, screenName: screenName, name: name, followers: followers)
+			return ProfileData(description: description, screenName: screenName, name: name, location: location, profileImageURL: profileImageURL, profileBackgroundImageURL: profileBackgroundImageURL)
 		}
 		return nil
 	}
 	
 	class func userFromData(json: [String : AnyObject]) -> User?
 	{
-		if let name = json["name"] as? String, profileImageURL = json["profile_image_url"] as? String, id = json["id_str"] as? String
+		if let name = json["name"] as? String, profileImageURL = json["profile_image_url_https"] as? String, id = json["id_str"] as? String
 		{
 			return User(name: name, id: id, profileImageURL: profileImageURL)
 		}

@@ -14,19 +14,44 @@ class ProfileViewController: UIViewController {
 	{
 		didSet
 		{
-			if nameLabel != nil && followerLabel != nil && descriptionLabel != nil
+			if nameLabel != nil
 			{
 				if let profileData = profileData
 				{
-					nameLabel.text = "\(profileData.name) (\(profileData.screenName))"
-					followerLabel.text = "\(profileData.followers) follower\(profileData.followers == 1 ? "" : "s")"
+					nameLabel.text = profileData.name
+					screenNameLabel.text = "@\(profileData.screenName)"
 					descriptionLabel.text = profileData.description
+					locationLabel.text = "location: \(profileData.location)"
+					ImageHandler.fetchImage(profileData.profileImageURL)
+						{ (error, image) in
+							if let error = error
+							{
+								print(error)
+							}
+							else
+							{
+								self.profileView.image = image
+							}
+					}
+					ImageHandler.fetchImage(profileData.profileBackgroundImageURL)
+						{ (error, image) in
+							if let error = error
+							{
+								print(error)
+							}
+							else
+							{
+								self.backgroundImageView.image = image
+							}
+					}
 				}
 				else
 				{
 					nameLabel.text = "sorry"
-					followerLabel.text = "can't see your profile when you aren't logged on"
+					screenNameLabel.text = "this won't work if you don't sign in to twitterß"
 					descriptionLabel.text = "hope you have a good day"
+					locationLabel.text = "bye"
+					profileView.image = nil
 				}
 			}
 		}
@@ -34,8 +59,10 @@ class ProfileViewController: UIViewController {
 	
 	@IBOutlet weak var profileView: UIImageView!
 	@IBOutlet weak var nameLabel: UILabel!
-	@IBOutlet weak var followerLabel: UILabel!
+	@IBOutlet weak var screenNameLabel: UILabel!
 	@IBOutlet weak var descriptionLabel: UILabel!
+	@IBOutlet weak var locationLabel: UILabel!
+	@IBOutlet weak var backgroundImageView: UIImageView!
 	
 	
 	
