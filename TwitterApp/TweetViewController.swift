@@ -27,11 +27,25 @@ class TweetViewController: UIViewController {
 		}
 	}
 	
-	@IBOutlet weak var portraitView: UIImageView!
+	@IBOutlet weak var portraitButton: UIButton!
 	{
 		didSet
 		{
-			//TODO: set the portrait to an appropriate portrait
+			//TODO: get the image
+			if let profileImageURL = tweet.user?.profileImageURL
+			{
+				ImageHandler.fetchImage(profileImageURL)
+					{ (error, image) in
+						if let error = error
+						{
+							print(error)
+						}
+						else
+						{
+							self.portraitButton.setBackgroundImage(image, forState: UIControlState.Normal)
+						}
+				}
+			}
 		}
 	}
 	

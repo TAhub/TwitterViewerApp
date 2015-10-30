@@ -10,7 +10,7 @@ import UIKit
 
 class TweetTableViewController: UITableViewController {
 
-	private var tweets:[Tweet]! = [Tweet]()
+	var tweets:[Tweet]! = [Tweet]()
 	{
 		didSet
 		{
@@ -20,21 +20,6 @@ class TweetTableViewController: UITableViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		getAccount()
-		
-		//get temporary tweets
-		//because I keep getting 429 errors
-//		for i in 0..<20
-//		{
-//			var text = "TEST"
-//			for _ in 0..<Int(Double(i) * 1.5)
-//			{
-//				text += " FILLER"
-//			}
-//			tweets.append(Tweet(id: "\(i)", text: text, user: User(name: "tester", profileImageURL: "a")))
-//		}
-		
 		
 		//make the background a netural gray, for the beautiful rainbow
 		view.backgroundColor = UIColor(hue: 0, saturation: 0, brightness: 0.5, alpha: 1)
@@ -47,6 +32,10 @@ class TweetTableViewController: UITableViewController {
 		refreshControl = UIRefreshControl()
 		refreshControl!.addTarget(self, action: "loadNewTweets:", forControlEvents: UIControlEvents.ValueChanged)
 		tableView.addSubview(refreshControl!)
+		
+		//register the real view controller
+		let nib = UINib(nibName: "TweetTableViewCell", bundle: nil)
+		tableView.registerNib(nib, forCellReuseIdentifier: "TweetCell")
 	}
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int { return 1 }
@@ -54,21 +43,6 @@ class TweetTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tweets.count
     }
-	
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-		if segue.identifier == "showTweet"
-		{
-			if let sender = sender as? TweetTableViewCell, destination = segue.destinationViewController as? TweetViewController
-			{
-				//give it the tweet
-				destination.tweet = tweets[tableView.indexPathForCell(sender)!.row]
-				
-				//and give it a pretty color
-				destination.textColor = sender.nameLabel.textColor
-				destination.backgroundColor = sender.backgroundColor
-			}
-		}
-	}
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetTableViewCell
@@ -78,38 +52,6 @@ class TweetTableViewController: UITableViewController {
 		
         return cell
     }
-	
-	private func getAccount()
-	{
-		LoginService.loginToTwitter()
-			{(error, account) in
-				if let error = error
-				{
-					print(error)
-				}
-				else if let account = account
-				{
-					TwitterService.sharedService.account = account
-					self.getUser()
-				}
-		}
-	}
-	
-	private func getUser()
-	{
-		TwitterService.getAuthUser()
-			{ (error, user) -> () in
-				if let error = error
-				{
-					print(error)
-				}
-				else
-				{
-					TwitterService.sharedService.user = user
-					self.loadNewTweets(self)
-				}
-		}
-	}
 	
 	override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
 	{

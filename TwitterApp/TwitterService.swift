@@ -19,9 +19,22 @@ class TwitterService
 	
 	class func getTweets(sinceId sinceId:Int?, maxId:Int?, completion: (String?, [Tweet]?) -> ())
 	{
-		let urlString = "https://api.twitter.com/1.1/statuses/home_timeline.json"
+		getTweetsFromURL(urlString: "https://api.twitter.com/1.1/statuses/home_timeline.json", sinceId: sinceId, maxId: maxId, count: "8", userId: nil, completion: completion)
+	}
+	
+	class func getTimelineTweets(forUser:User, sinceId:Int?, maxId:Int?, completion: (String?, [Tweet]?) -> ())
+	{
+		getTweetsFromURL(urlString: "https://api.twitter.com/1.1/statuses/user_timeline.json", sinceId: sinceId, maxId: maxId, count: "8", userId: forUser.id, completion: completion)
+	}
+	
+	private class func getTweetsFromURL(urlString urlString:String, sinceId:Int?, maxId:Int?, count:String, userId:String?, completion: (String?, [Tweet]?) -> ())
+	{
 		var parameters = [NSObject : String]()
-		parameters["count"] = "8"
+		parameters["count"] = count
+		if let userId = userId
+		{
+			parameters["user_id"] = userId
+		}
 		if let sinceId = sinceId
 		{
 			parameters["since_id"] = "\(sinceId)"
@@ -30,7 +43,6 @@ class TwitterService
 		{
 			parameters["max_id"] = "\(maxId-1)"
 		}
-		
 		doRequest(urlString, parameters: parameters)
 			{ (error, data) in
 				if let error = error
