@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E434E92F1BE3CAF20067D015 /* RainbowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E434E92E1BE3CAF20067D015 /* RainbowViewController.swift */; };
 		E45FB7421BE174B900BF092B /* TweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45FB7411BE174B900BF092B /* TweetViewController.swift */; };
 		E45FB7441BE17BF700BF092B /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45FB7431BE17BF700BF092B /* TweetTableViewCell.swift */; };
 		E47E47931BE2F648002EF1EA /* ImageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47E47921BE2F648002EF1EA /* ImageHandler.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E434E92E1BE3CAF20067D015 /* RainbowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RainbowViewController.swift; sourceTree = "<group>"; };
 		E45FB7411BE174B900BF092B /* TweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetViewController.swift; sourceTree = "<group>"; };
 		E45FB7431BE17BF700BF092B /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
 		E47C0E071BDEE294006226C2 /* ChallengeW1D1.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ChallengeW1D1.playground; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 		E4C03F1A1BE293A9008A8BFF /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				E434E92E1BE3CAF20067D015 /* RainbowViewController.swift */,
 				E4C03F1F1BE2942B008A8BFF /* ProfileViewController.swift */,
 				E47E47981BE30FFE002EF1EA /* TweetTableViewCell.xib */,
 				E45FB7431BE17BF700BF092B /* TweetTableViewCell.swift */,
@@ -211,6 +214,7 @@
 			files = (
 				E4F4465C1BDED69900A7BC2D /* TweetJSONParser.swift in Sources */,
 				E4A5916C1BE0308B00DD8015 /* TwitterService.swift in Sources */,
+				E434E92F1BE3CAF20067D015 /* RainbowViewController.swift in Sources */,
 				E45FB7441BE17BF700BF092B /* TweetTableViewCell.swift in Sources */,
 				E4C03F151BE29269008A8BFF /* ProfileData.swift in Sources */,
 				E4A5916A1BE02F6500DD8015 /* LoginService.swift in Sources */,

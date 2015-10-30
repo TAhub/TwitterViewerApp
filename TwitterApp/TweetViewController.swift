@@ -10,23 +10,6 @@ import UIKit
 
 class TweetViewController: UIViewController {
 
-	@IBOutlet weak var nameLabel: UILabel!
-	{
-		didSet
-		{
-			nameLabel.text = (tweet.user?.name ?? "spooky unknown person")
-			nameLabel.textColor = textColor
-		}
-	}
-	@IBOutlet weak var textLabel: UILabel!
-	{
-		didSet
-		{
-			textLabel.text = tweet.text
-			textLabel.textColor = textColor
-		}
-	}
-	
 	@IBOutlet weak var portraitButton: UIButton!
 	{
 		didSet
@@ -48,6 +31,8 @@ class TweetViewController: UIViewController {
 		}
 	}
 	
+	@IBOutlet weak var nameLabel: UILabel!
+	@IBOutlet weak var textLabel: UILabel!
 	
 	var tweet:Tweet!
 	{
@@ -66,6 +51,22 @@ class TweetViewController: UIViewController {
 		super.viewWillAppear(animated)
 		
 		view.backgroundColor = backgroundColor
+		
+		textLabel.text = tweet.text
+		textLabel.textColor = textColor
+		
+		nameLabel.text = (tweet.user?.name ?? "spooky unknown person")
+		nameLabel.textColor = textColor
+	}
+	override func viewDidAppear(animated: Bool)
+	{
+		super.viewDidAppear(animated)
+		
+		if NSUserDefaults.standardUserDefaults().boolForKey("access")
+		{
+			nameLabel.text = nameLabel.text!.uppercaseString
+			textLabel.text = textLabel.text!.uppercaseString
+		}
 	}
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)

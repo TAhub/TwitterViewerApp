@@ -14,45 +14,58 @@ class ProfileViewController: UIViewController {
 	{
 		didSet
 		{
-			if nameLabel != nil
+			reloadLabels()
+		}
+	}
+	
+	private func reloadLabels()
+	{
+		if nameLabel != nil
+		{
+			if let profileData = profileData
 			{
-				if let profileData = profileData
-				{
-					nameLabel.text = profileData.name
-					screenNameLabel.text = "@\(profileData.screenName)"
-					descriptionLabel.text = profileData.description
-					locationLabel.text = "location: \(profileData.location)"
-					ImageHandler.fetchImage(profileData.profileImageURL)
-						{ (error, image) in
-							if let error = error
-							{
-								print(error)
-							}
-							else
-							{
-								self.profileView.image = image
-							}
-					}
-					ImageHandler.fetchImage(profileData.profileBackgroundImageURL)
-						{ (error, image) in
-							if let error = error
-							{
-								print(error)
-							}
-							else
-							{
-								self.backgroundImageView.image = image
-							}
-					}
+				nameLabel.text = profileData.name
+				screenNameLabel.text = "@\(profileData.screenName)"
+				descriptionLabel.text = profileData.description
+				locationLabel.text = "location: \(profileData.location)"
+				ImageHandler.fetchImage(profileData.profileImageURL)
+					{ (error, image) in
+						if let error = error
+						{
+							print(error)
+						}
+						else
+						{
+							self.profileView.image = image
+						}
 				}
-				else
-				{
-					nameLabel.text = "sorry"
-					screenNameLabel.text = "this won't work if you don't sign in to twitterß"
-					descriptionLabel.text = "hope you have a good day"
-					locationLabel.text = "bye"
-					profileView.image = nil
+				ImageHandler.fetchImage(profileData.profileBackgroundImageURL)
+					{ (error, image) in
+						if let error = error
+						{
+							print(error)
+						}
+						else
+						{
+							self.backgroundImageView.image = image
+						}
 				}
+			}
+			else
+			{
+				nameLabel.text = "sorry"
+				screenNameLabel.text = "this won't work if you don't sign in to twitter"
+				descriptionLabel.text = "hope you have a good day"
+				locationLabel.text = "bye"
+				profileView.image = nil
+			}
+			
+			if NSUserDefaults.standardUserDefaults().boolForKey("access")
+			{
+				nameLabel.text = nameLabel.text!.uppercaseString
+				screenNameLabel.text = screenNameLabel.text!.uppercaseString
+				descriptionLabel.text = descriptionLabel.text!.uppercaseString
+				locationLabel.text = locationLabel.text!.uppercaseString
 			}
 		}
 	}
@@ -66,8 +79,8 @@ class ProfileViewController: UIViewController {
 	
 	
 	
-	override func viewWillAppear(animated: Bool) {
-		super.viewWillAppear(animated)
+	override func viewDidAppear(animated: Bool) {
+		super.viewDidAppear(animated)
 		
 		if profileData == nil
 		{
@@ -89,5 +102,13 @@ class ProfileViewController: UIViewController {
 					}
 			}
 		}
+		else
+		{
+			reloadLabels()
+		}
+		
+		//for some reason, the background keeps ending up in front
+		//to fix this, I am manually sending it to the back
+		backgroundImageView.sendSubviewToBack(view)
 	}
 }

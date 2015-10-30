@@ -18,24 +18,15 @@ class HomeTweetTableViewController: TweetTableViewController {
 		
 		//get temporary tweets
 		//because I keep getting 429 errors
-		//		for i in 0..<20
-		//		{
-		//			var text = "TEST"
-		//			for _ in 0..<Int(Double(i) * 1.5)
-		//			{
-		//				text += " FILLER"
-		//			}
-		//			tweets.append(Tweet(id: "\(i)", text: text, user: User(name: "tester", profileImageURL: "a")))
-		//		}
-	}
-	
-	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetTableViewCell
-		
-		cell.tweet = tweets[indexPath.row]
-		cell.colorPoint = CGFloat(Double(indexPath.row % 12) / 12.0)
-		
-		return cell
+//		for i in 0..<20
+//		{
+//			var text = "TEST"
+//			for _ in 0..<Int(Double(i) * 1.5)
+//			{
+//				text += " FILLER"
+//			}
+//			tweets.append(Tweet(id: "\(i)", text: text, originalTweet: nil, user: User(name: "tester", id: "a", profileImageURL: "a")))
+//		}
 	}
 	
 	private func getAccount()

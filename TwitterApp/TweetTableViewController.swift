@@ -38,6 +38,23 @@ class TweetTableViewController: UITableViewController {
 		//register the real view controller
 		let nib = UINib(nibName: "TweetTableViewCell", bundle: nil)
 		tableView.registerNib(nib, forCellReuseIdentifier: "TweetCell")
+		
+		//set defaults
+		let defaults = NSUserDefaults.standardUserDefaults()
+		if defaults.objectForKey("wavelength") == nil
+		{
+			//initialize the defaults
+			defaults.setFloat(0.5, forKey: "wavelength")
+			defaults.setFloat(0.5, forKey: "saturation")
+			defaults.setBool(false, forKey: "access")
+		}
+	}
+	
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		//reload the table in case my rainbow settings changed
+		tableView.reloadData()
 	}
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int { return 1 }
@@ -49,8 +66,12 @@ class TweetTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetTableViewCell
 
+		let defaults = NSUserDefaults.standardUserDefaults()
+		
+		let wavelength = 4 + Int(round(defaults.floatForKey("wavelength") * 16))
+		
 		cell.tweet = tweets[indexPath.row]
-		cell.colorPoint = CGFloat(Double(indexPath.row % 12) / 12.0)
+		cell.colorPoint = CGFloat(Double(indexPath.row % wavelength) / Double(wavelength))
 		
         return cell
     }

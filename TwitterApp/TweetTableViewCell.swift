@@ -34,19 +34,29 @@ class TweetTableViewCell: UITableViewCell {
 						}
 				}
 			}
+			
+			if NSUserDefaults.standardUserDefaults().boolForKey("access")
+			{
+				nameLabel.text = nameLabel.text!.uppercaseString
+				contentLabel.text = contentLabel.text!.uppercaseString
+			}
 		}
 	}
 	var colorPoint:CGFloat
 	{
 		set
 		{
-			backgroundColor = UIColor(hue: newValue, saturation: 0.5, brightness: 1, alpha: 1)
+			let defaults = NSUserDefaults.standardUserDefaults()
+			
+			let saturation = CGFloat(0.25 + defaults.floatForKey("saturation") * 0.5)
+			
+			backgroundColor = UIColor(hue: newValue, saturation: saturation, brightness: 1, alpha: 1)
 			var textHue = newValue + 0.5
 			if textHue > 1
 			{
 				textHue -= 1
 			}
-			nameLabel.textColor = UIColor(hue: textHue, saturation: 1, brightness: 1, alpha: 1)
+			nameLabel.textColor = UIColor(hue: textHue, saturation: saturation + 0.25, brightness: 1, alpha: 1)
 			contentLabel.textColor = nameLabel.textColor
 		}
 		get
